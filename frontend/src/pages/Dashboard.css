@@ -617,3 +617,29 @@
     gap: 1rem;
   }
 }
+
+/* Attachment Link */
+.attachment-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: #F2E3D6;
+  color: #C4612F;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.attachment-link:hover {
+  background-color: #C4612F;
+  transform: translateY(-1px);
+}
+
+.training-details {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

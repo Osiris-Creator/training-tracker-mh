@@ -251,6 +251,17 @@ function Dashboard() {
                     <div className="training-hours-badge">
                       {formatDuration(record.training_hours)}
                     </div>
+                    {record.attachment_url && (
+                      <a
+                        href={record.attachment_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="attachment-link"
+                        title="View attachment"
+                      >
+                        📎
+                      </a>
+                    )}
                   </div>
                 </div>
               ))
