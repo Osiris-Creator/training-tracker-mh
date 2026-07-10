@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: training-tracker-backend
+    env: node
+    region: singapore
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/employees
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001

@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap');
+
+.app {
+  min-height: 100vh;
+  background-color: #F5F1E8;
+}
+
+.navbar {
+  background-color: #FDFBF7;
+  border-bottom: 1px solid #E8E3D6;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-divider {
+  font-size: 1.5rem;
+  color: #E8E3D6;
+  font-weight: 300;
+}
+
+.logo-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nav-link {
+  color: #6B6B6B;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: #F5F1E8;
+  color: #1A1A1A;
+  border-color: #E8E3D6;
+}
+
+.nav-link.active {
+  background-color: #D4735E;
+  color: #FFFFFF;
+  font-weight: 500;
+  border-color: #D4735E;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #E8E3D6;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.logout-btn:hover {
+  background-color: #FFEBEE;
+  color: #C62828;
+  border-color: #FFCDD2;
+}
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    text-align: center;
+    width: 100%;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .main-content {
+    max-width: 90%;
+  }
+}

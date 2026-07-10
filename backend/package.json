@@ -1,0 +1,26 @@
+{
+  "name": "training-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend API for employee training tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "init-db": "node scripts/initDatabase.js",
+    "migrate": "node migrate.js",
+    "import": "node import-employees.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.7",
+    "pg": "^8.11.3",
+    "qrcode": "^1.5.3",
+    "body-parser": "^1.20.2",
+    "axios": "^1.6.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
