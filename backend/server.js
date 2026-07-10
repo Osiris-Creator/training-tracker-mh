@@ -1,9 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 const QRCode = require('qrcode');
 const { dbAll, dbGet, dbRun } = require('./db-helpers');
-const { upload } = require('./cloudinary-config');
+const { uploadFile, deleteFile } = require('./supabase-storage');
+
+// Configure multer for memory storage (will upload to Supabase)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 } // 50MB limit
+});
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -280,8 +287,15 @@ app.post('/api/training', upload.single('attachment'), async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Get file URL from Cloudinary if file was uploaded
-    const attachment_url = req.file ? req.file.path : null;
+    // Upload file to Supabase if provided
+    let attachment_url = null;
+    if (req.file) {
+      attachment_url = await uploadFile(
+        req.file.buffer,
+        req.file.originalname,
+        req.file.mimetype
+      );
+    }
 
     const sql = `
       INSERT INTO training_records (employee_id, role, training_date, training_topic, training_hours, trainer_name, notes, session_id, attachment_url)
@@ -609,20 +623,7 @@ app.get('/api/qrcode', async (req, res) => {
   }
 });
 
-// Proxy endpoint to serve files with inline content-disposition
-app.get('/api/attachment/preview', async (req, res) => {
-  try {
-    const { url } = req.query;
-
-    if (!url || !url.includes('cloudinary.com')) {
-      return res.status(400).json({ error: 'Invalid URL' });
-    }
-
-    // Fetch the file from Cloudinary
-    const axios = require('axios');
-    const response = await axios.get(url, {
-      responseType: 'stream'
-    });
+// No proxy endpoint needed - Supabase Storage serves files directly with inline disposition!
 
     // Determine content type and extract filename from URL
     let contentType = 'application/octet-stream';
