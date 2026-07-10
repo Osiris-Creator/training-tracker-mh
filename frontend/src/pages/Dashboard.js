@@ -253,7 +253,7 @@ function Dashboard() {
                     </div>
                     {record.attachment_url && (
                       <a
-                        href={`${API_BASE_URL}/attachment/preview?url=${encodeURIComponent(record.attachment_url)}`}
+                        href={`${API_BASE_URL.replace('/api', '')}/api/attachment/preview?url=${encodeURIComponent(record.attachment_url)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="attachment-link"
