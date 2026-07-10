@@ -11,7 +11,18 @@ const api = axios.create({
 
 export const getEmployees = () => api.get('/employees');
 export const getEmployee = (id) => api.get(`/employees/${id}`);
-export const submitTraining = (data) => api.post('/training', data);
+export const submitTraining = (data) => {
+  // If data is FormData (with file upload), use multipart/form-data
+  if (data instanceof FormData) {
+    return axios.post(`${API_BASE_URL}/training`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
+  // Otherwise use regular JSON post
+  return api.post('/training', data);
+};
 export const getTrainingRecords = () => api.get('/training');
 export const getEmployeeTraining = (id) => api.get(`/training/employee/${id}`);
 export const getDashboardStats = () => api.get('/dashboard/stats');

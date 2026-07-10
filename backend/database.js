@@ -53,6 +53,7 @@ if (process.env.DATABASE_URL) {
         trainer_name TEXT,
         notes TEXT,
         session_id INTEGER,
+        attachment_url TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
       )

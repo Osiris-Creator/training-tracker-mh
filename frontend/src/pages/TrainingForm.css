@@ -552,3 +552,67 @@
     flex: 1;
   }
 }
+
+/* Attachment Upload Styles */
+.form-helper-text {
+  display: block;
+  font-size: 0.875rem;
+  color: #6B6B6B;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.attachment-preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #F5F1E8;
+  border: 1px solid #E8E3D6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #E8E3D6;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.file-icon {
+  font-size: 2rem;
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #1A1A1A;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.remove-attachment-btn {
+  padding: 0.5rem 1rem;
+  background-color: #FFF;
+  border: 1px solid #E8E3D6;
+  border-radius: 999px;
+  color: #C4612F;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-attachment-btn:hover {
+  background-color: #FEF5F1;
+  border-color: #C4612F;
+  transform: translateY(-1px);
+}

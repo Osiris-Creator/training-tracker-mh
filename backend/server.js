@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const QRCode = require('qrcode');
 const { dbAll, dbGet, dbRun } = require('./db-helpers');
+const { upload } = require('./cloudinary-config');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -270,8 +271,8 @@ app.get('/api/training/session/:sessionId', async (req, res) => {
   }
 });
 
-// Submit training record
-app.post('/api/training', async (req, res) => {
+// Submit training record with file upload
+app.post('/api/training', upload.single('attachment'), async (req, res) => {
   try {
     const { employee_id, role, training_date, training_topic, training_hours, trainer_name, notes, session_id } = req.body;
 
@@ -279,15 +280,19 @@ app.post('/api/training', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Get file URL from Cloudinary if file was uploaded
+    const attachment_url = req.file ? req.file.path : null;
+
     const sql = `
-      INSERT INTO training_records (employee_id, role, training_date, training_topic, training_hours, trainer_name, notes, session_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO training_records (employee_id, role, training_date, training_topic, training_hours, trainer_name, notes, session_id, attachment_url)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const result = await dbRun(sql, [String(employee_id), role || 'trainee', training_date, training_topic, training_hours, trainer_name, notes, session_id || null]);
+    const result = await dbRun(sql, [String(employee_id), role || 'trainee', training_date, training_topic, training_hours, trainer_name, notes, session_id || null, attachment_url]);
     res.json({
       id: result.lastID,
-      message: 'Training record created successfully'
+      message: 'Training record created successfully',
+      attachment_url
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

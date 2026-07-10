@@ -11,6 +11,8 @@ function TrainingForm() {
   const [selectedTrainer, setSelectedTrainer] = useState(null);
   const [todaySessions, setTodaySessions] = useState([]);
   const [joinedSessionId, setJoinedSessionId] = useState(null);
+  const [attachmentFile, setAttachmentFile] = useState(null);
+  const [attachmentPreview, setAttachmentPreview] = useState(null);
   const [formData, setFormData] = useState({
     department: '',
     employee_id: '',
@@ -164,12 +166,22 @@ function TrainingForm() {
     }
 
     try {
-      await submitTraining({
-        ...formData,
-        employee_id: formData.employee_id,
-        training_hours: totalHours,
-        session_id: joinedSessionId // Link to trainer's session if joined
-      });
+      const formDataToSend = new FormData();
+      formDataToSend.append('employee_id', formData.employee_id);
+      formDataToSend.append('role', formData.role);
+      formDataToSend.append('training_date', formData.training_date);
+      formDataToSend.append('training_topic', formData.training_topic);
+      formDataToSend.append('training_hours', totalHours);
+      formDataToSend.append('trainer_name', formData.trainer_name);
+      formDataToSend.append('notes', formData.notes);
+      if (joinedSessionId) {
+        formDataToSend.append('session_id', joinedSessionId);
+      }
+      if (attachmentFile) {
+        formDataToSend.append('attachment', attachmentFile);
+      }
+
+      await submitTraining(formDataToSend);
 
       setSuccess(true);
       setFormData({
@@ -185,7 +197,9 @@ function TrainingForm() {
       });
       setSelectedEmployee(null);
       setFilteredEmployees([]);
-      setJoinedSessionId(null); // Reset session ID
+      setJoinedSessionId(null);
+      setAttachmentFile(null);
+      setAttachmentPreview(null);
 
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
@@ -513,6 +527,65 @@ function TrainingForm() {
               placeholder="Additional information (optional)"
               className="form-textarea"
             ></textarea>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="attachment" className="form-label">
+              Attachment (Optional)
+            </label>
+            <p className="form-helper-text">Upload photo or document as evidence (Max 5MB: JPG, PNG, PDF, DOC, DOCX)</p>
+            <input
+              type="file"
+              id="attachment"
+              accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  if (file.size > 5 * 1024 * 1024) {
+                    setError('File size must be less than 5MB');
+                    e.target.value = null;
+                    return;
+                  }
+                  setAttachmentFile(file);
+                  setError('');
+
+                  // Preview for images
+                  if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setAttachmentPreview(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                  } else {
+                    setAttachmentPreview(null);
+                  }
+                }
+              }}
+              className="form-input"
+            />
+            {attachmentFile && (
+              <div className="attachment-preview">
+                {attachmentPreview ? (
+                  <img src={attachmentPreview} alt="Preview" className="preview-image" />
+                ) : (
+                  <div className="file-info">
+                    <span className="file-icon">📄</span>
+                    <span className="file-name">{attachmentFile.name}</span>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAttachmentFile(null);
+                    setAttachmentPreview(null);
+                    document.getElementById('attachment').value = null;
+                  }}
+                  className="remove-attachment-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           </div>
 
           <button
