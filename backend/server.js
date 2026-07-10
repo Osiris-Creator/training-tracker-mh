@@ -609,6 +609,31 @@ app.get('/api/qrcode', async (req, res) => {
   }
 });
 
+// Proxy endpoint to serve files with inline content-disposition
+app.get('/api/attachment/preview', async (req, res) => {
+  try {
+    const { url } = req.query;
+
+    if (!url || !url.includes('cloudinary.com')) {
+      return res.status(400).json({ error: 'Invalid URL' });
+    }
+
+    // Modify URL to add fl_attachment flag removal for inline viewing
+    let modifiedUrl = url;
+
+    // For PDF files, ensure they open inline
+    if (url.includes('.pdf')) {
+      // Replace /upload/ with /upload/fl_attachment:false/
+      modifiedUrl = url.replace('/upload/', '/upload/fl_attachment:false/');
+    }
+
+    // Redirect to the modified Cloudinary URL
+    res.redirect(modifiedUrl);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // TEMPORARY: Manual migration trigger endpoint
 app.post('/api/admin/run-migration', async (req, res) => {
   const { runMigration } = require('./run-migration');
