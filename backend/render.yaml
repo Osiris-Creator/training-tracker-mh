@@ -3,7 +3,7 @@ services:
     name: training-tracker-backend
     env: node
     region: singapore
-    buildCommand: npm install && npm run migrate
+    buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/employees
     envVars:
