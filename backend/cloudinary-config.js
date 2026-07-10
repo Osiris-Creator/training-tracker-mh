@@ -12,12 +12,17 @@ cloudinary.config({
 // Configure storage
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
-    folder: 'training-attachments',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'],
-    resource_type: 'auto',
-    access_mode: 'public', // Make files publicly accessible
-    max_file_size: 5 * 1024 * 1024 // 5MB
+  params: async (req, file) => {
+    // Determine resource type based on file type
+    const isImage = file.mimetype.startsWith('image/');
+
+    return {
+      folder: 'training-attachments',
+      allowed_formats: ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'],
+      resource_type: isImage ? 'image' : 'raw', // Use 'raw' for non-images
+      access_mode: 'public',
+      type: 'upload' // Ensure it's set to 'upload' not 'private'
+    };
   }
 });
 
