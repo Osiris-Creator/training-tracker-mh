@@ -624,23 +624,41 @@ app.get('/api/attachment/preview', async (req, res) => {
       responseType: 'stream'
     });
 
-    // Determine content type from the original URL
+    // Determine content type and extract filename from URL
     let contentType = 'application/octet-stream';
+    let extension = 'file';
+
     if (url.includes('.pdf')) {
       contentType = 'application/pdf';
+      extension = 'pdf';
     } else if (url.includes('.jpg') || url.includes('.jpeg')) {
       contentType = 'image/jpeg';
+      extension = 'jpg';
     } else if (url.includes('.png')) {
       contentType = 'image/png';
+      extension = 'png';
     } else if (url.includes('.doc')) {
       contentType = 'application/msword';
+      extension = 'doc';
     } else if (url.includes('.docx')) {
       contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      extension = 'docx';
     }
+
+    // Extract filename from URL or generate one
+    const urlParts = url.split('/');
+    const filename = urlParts[urlParts.length - 1] || `document.${extension}`;
 
     // Set headers to display inline instead of download
     res.setHeader('Content-Type', contentType);
-    res.setHeader('Content-Disposition', 'inline');
+    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
+    // Forward Content-Length if available
+    if (response.headers['content-length']) {
+      res.setHeader('Content-Length', response.headers['content-length']);
+    }
 
     // Pipe the file stream to response
     response.data.pipe(res);
