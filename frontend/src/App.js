@@ -94,11 +94,30 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
     setIsAuthenticated(loggedIn);
+    setIsLoading(false);
   }, []);
+
+  if (isLoading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        backgroundColor: '#FDFBF7'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '48px', marginBottom: '20px' }}>⏳</div>
+          <div style={{ color: '#5C635D' }}>Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Router>
