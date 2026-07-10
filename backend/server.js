@@ -604,6 +604,13 @@ app.get('/api/qrcode', async (req, res) => {
   }
 });
 
+// TEMPORARY: Manual migration trigger endpoint
+app.post('/api/admin/run-migration', async (req, res) => {
+  const { runMigration } = require('./run-migration');
+  const result = await runMigration();
+  res.json(result);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
