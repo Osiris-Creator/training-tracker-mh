@@ -1,0 +1,623 @@
+[
+  {
+    "employee_id": "00002031",
+    "employee_name": "Niphawan Suksom",
+    "department": "Accounting",
+    "position": "Assistant Finance Controllor",
+    "level": "DH",
+    "email": "niphawan_su@minor.com",
+    "phone": "0825962246"
+  },
+  {
+    "employee_id": "00059395",
+    "employee_name": "Jirarat  Jaisue",
+    "department": "Accounting",
+    "position": "Accounting Supervisor",
+    "level": "UH",
+    "email": "king12jiraratja@gmail.com",
+    "phone": "0870172073"
+  },
+  {
+    "employee_id": "00208601",
+    "employee_name": "Saran Jantarak",
+    "department": "Accounting",
+    "position": "Accounting Supervisor",
+    "level": "UH",
+    "email": "sarunjantarak@gmail.com",
+    "phone": "0980907679"
+  },
+  {
+    "employee_id": "00046444",
+    "employee_name": "Tatpon Srisaeng",
+    "department": "Engineering",
+    "position": "Engineering Supervisor",
+    "level": "UH",
+    "email": "samuiyp@gmail.com",
+    "phone": "0615549375"
+  },
+  {
+    "employee_id": "00202290",
+    "employee_name": "Akawat Panwan",
+    "department": "Engineering",
+    "position": "Engineering",
+    "level": "TM",
+    "email": "akawati@icloud.com",
+    "phone": "0659368964"
+  },
+  {
+    "employee_id": "00204353",
+    "employee_name": "Gallon Boontree",
+    "department": "Engineering",
+    "position": "Senior Engineering Supervisor",
+    "level": "UH",
+    "email": "rattanaporn181125@gmail.com",
+    "phone": "0630122364"
+  },
+  {
+    "employee_id": "00215039",
+    "employee_name": "Surasak Rueangthong",
+    "department": "Engineering",
+    "position": "Carpenter & Painter",
+    "level": "TM",
+    "email": "Surasaksamui17@gmail.com",
+    "phone": "0948644605"
+  },
+  {
+    "employee_id": "00222327",
+    "employee_name": "Adisak Kaewkhunthong",
+    "department": "Engineering",
+    "position": "Assisstant Chief Engineer",
+    "level": "SH",
+    "email": "adisak_ka@minor.com",
+    "phone": "0622138798"
+  },
+  {
+    "employee_id": "00234551",
+    "employee_name": "Warawut Suisrisuk",
+    "department": "Engineering",
+    "position": "Gardener",
+    "level": "TM",
+    "email": "warawutza2531@gmail.com",
+    "phone": "0649684001"
+  },
+  {
+    "employee_id": "07124407",
+    "employee_name": "Jirawat Kongkaew",
+    "department": "Engineering",
+    "position": "Senior Engineering Supervisor",
+    "level": "UH",
+    "email": "www.bao10081989@gmail.com",
+    "phone": "0980486137"
+  },
+  {
+    "employee_id": "07128291",
+    "employee_name": "Pupa Kijwet",
+    "department": "Engineering",
+    "position": "Technician",
+    "level": "TM",
+    "email": "phuphakicwech9@gmail.com",
+    "phone": "0987122532"
+  },
+  {
+    "employee_id": "07134935",
+    "employee_name": "Sahatsawat Bangmuaeng",
+    "department": "Engineering",
+    "position": "Technician",
+    "level": "TM",
+    "email": "sahatsawat271261@gmail.com",
+    "phone": "0937910989"
+  },
+  {
+    "employee_id": "00025713",
+    "employee_name": "Tianchai Tongseang",
+    "department": "F&B Kitchen",
+    "position": "Chef de Cuisine",
+    "level": "SH",
+    "email": "tianchai_to@minor.com",
+    "phone": "085-3038315"
+  },
+  {
+    "employee_id": "00103089",
+    "employee_name": "Penpuk Rodkaew",
+    "department": "F&B Kitchen",
+    "position": "Demi Chef de Partie",
+    "level": "TM",
+    "email": "penpuk_ro@gmail.com",
+    "phone": "065-7718778"
+  },
+  {
+    "employee_id": "00204993",
+    "employee_name": "Worasak Meepian",
+    "department": "F&B Kitchen",
+    "position": "Commis 1",
+    "level": "TM",
+    "email": "kunkanitmeepian@gmail.com",
+    "phone": "065-3937578"
+  },
+  {
+    "employee_id": "00211995",
+    "employee_name": "Kanokwan Maneechot",
+    "department": "F&B Kitchen",
+    "position": "Commis 3",
+    "level": "TM",
+    "email": "kanokwan123mc@gmail.com",
+    "phone": "098-4782942"
+  },
+  {
+    "employee_id": "00219550",
+    "employee_name": "Natthamon Nilubon",
+    "department": "F&B Kitchen",
+    "position": "Commis 1",
+    "level": "TM",
+    "email": "yingnatthamon@gmail.com",
+    "phone": "099-9576514"
+  },
+  {
+    "employee_id": "00223504",
+    "employee_name": "Kanoktip Tongsak",
+    "department": "F&B Kitchen",
+    "position": "Commis 2",
+    "level": "TM",
+    "email": "K.0810840542k@gmail.com",
+    "phone": "081-0840542"
+  },
+  {
+    "employee_id": "00224099",
+    "employee_name": "Methavee Sriwirat",
+    "department": "F&B Kitchen",
+    "position": "Steward",
+    "level": "TM",
+    "email": "ma.tave3@hotmail.com",
+    "phone": "080-2179302"
+  },
+  {
+    "employee_id": "00230742",
+    "employee_name": "Tapakorn Musikacharoen",
+    "department": "F&B Kitchen",
+    "position": "Commis 3",
+    "level": "TM",
+    "email": "krit_tana1002@hotmail.co.th",
+    "phone": "064-2943460"
+  },
+  {
+    "employee_id": "07128377",
+    "employee_name": "Kroekchai Pongpaew",
+    "department": "F&B Kitchen",
+    "position": "Steward",
+    "level": "TM",
+    "email": "beerlovesamui20@gmail.com",
+    "phone": "066-1520677"
+  },
+  {
+    "employee_id": "00087463",
+    "employee_name": "Siriporn Somcharoen",
+    "department": "F&B Service",
+    "position": "Assisant Outlet Manager",
+    "level": "SH",
+    "email": "siriporn0967@gmail.com",
+    "phone": "0967057209"
+  },
+  {
+    "employee_id": "00211993",
+    "employee_name": "Arporn Jompon",
+    "department": "F&B Service",
+    "position": "Restaurant Captian",
+    "level": "TM",
+    "email": "arpornjompon@gmail.com",
+    "phone": "0612133963"
+  },
+  {
+    "employee_id": "00217053",
+    "employee_name": "Punyaphat Kongwatmai",
+    "department": "F&B Service",
+    "position": "F&B Attendant",
+    "level": "TM",
+    "email": "punyapat130960@gmail.com",
+    "phone": "0984706081"
+  },
+  {
+    "employee_id": "00224454",
+    "employee_name": "Manika Munirat",
+    "department": "F&B Service",
+    "position": "Restuarant Caption",
+    "level": "TM",
+    "email": "manika254230@gmail.com",
+    "phone": "0952307969"
+  },
+  {
+    "employee_id": "07110143",
+    "employee_name": "Pacharapong Intharak",
+    "department": "F&B Service",
+    "position": "Bartender",
+    "level": "TM",
+    "email": "djpacharapong@gmail.com",
+    "phone": "0842644014"
+  },
+  {
+    "employee_id": "07110181",
+    "employee_name": "Naramon Nukul",
+    "department": "F&B Service",
+    "position": "F&B Attendant",
+    "level": "TM",
+    "email": "naramon042545@icloud.com",
+    "phone": "0628148709"
+  },
+  {
+    "employee_id": "07112738",
+    "employee_name": "Jirayu Taptimsuwan",
+    "department": "F&B Service",
+    "position": "F&B Attendant",
+    "level": "TM",
+    "email": "jirayu1422003@gmail.com",
+    "phone": "0945905869"
+  },
+  {
+    "employee_id": "07116556",
+    "employee_name": "Siri Inporm",
+    "department": "F&B Service",
+    "position": "Bar Supervisor",
+    "level": "UH",
+    "email": "siri.tam2531@gmail.com",
+    "phone": "0901091428, 0982121842"
+  },
+  {
+    "employee_id": "07121486",
+    "employee_name": "Nobphadon  Merangsi",
+    "department": "F&B Service",
+    "position": "Assistant Outet Manager",
+    "level": "SH",
+    "email": "nobphadon_me@minor.com",
+    "phone": "0826414029"
+  },
+  {
+    "employee_id": "07124411",
+    "employee_name": "Chadaporn Buntot",
+    "department": "F&B Service",
+    "position": "Bartender",
+    "level": "TM",
+    "email": "ิิbontotchadaporn@gmail.com",
+    "phone": "0985959892"
+  },
+  {
+    "employee_id": "07125607",
+    "employee_name": "Chawin Boonyanupong",
+    "department": "F&B Service",
+    "position": "Barista",
+    "level": "TM",
+    "email": "chawin120941@gmail.com",
+    "phone": "0984706081"
+  },
+  {
+    "employee_id": "07119402",
+    "employee_name": "Salamas Sensahe",
+    "department": "F&B Service",
+    "position": "Bartender",
+    "level": "TM",
+    "email": "sensahe.mas@gmail.com",
+    "phone": "0950944774"
+  },
+  {
+    "employee_id": "07134936",
+    "employee_name": "Srinapa Kongkaew",
+    "department": "F&B Service",
+    "position": "F&B Coordinator",
+    "level": "UH",
+    "email": "aomam.snp18@gmail.com",
+    "phone": "0911966446"
+  },
+  {
+    "employee_id": "07139811",
+    "employee_name": "Supranee Podoem",
+    "department": "F&B Service",
+    "position": "FB Supervisor",
+    "level": "UH",
+    "email": "nansupranee18@gmail.com",
+    "phone": ""
+  },
+  {
+    "employee_id": "00200780",
+    "employee_name": "Monruedee Pridum",
+    "department": "Front Office",
+    "position": "Assistant Front Office Manager",
+    "level": "SH",
+    "email": "p_monruedee@hotmail.com",
+    "phone": "0848892656"
+  },
+  {
+    "employee_id": "00212901",
+    "employee_name": "Kotchakorn Chousuk",
+    "department": "Front Office",
+    "position": "Guest Service Agent",
+    "level": "TM",
+    "email": "munthecoolest@gmail.com",
+    "phone": "0952611114"
+  },
+  {
+    "employee_id": "00200946",
+    "employee_name": "Seksan Chaichat",
+    "department": "Front Office",
+    "position": "Guest Service Supervisor",
+    "level": "UH",
+    "email": "bomb212@gmail.com",
+    "phone": "0800657524"
+  },
+  {
+    "employee_id": "00234549",
+    "employee_name": "Nattanan Pengruang",
+    "department": "Front Office",
+    "position": "Guest Service Agent",
+    "level": "TM",
+    "email": "nattanan20022@gmail.com",
+    "phone": "0951017045"
+  },
+  {
+    "employee_id": "00222518",
+    "employee_name": "Waralee Jamsri",
+    "department": "Reservations",
+    "position": "Reservation Supervisor",
+    "level": "UH",
+    "email": "n.waralee08@gmail.com",
+    "phone": "0806581069"
+  },
+  {
+    "employee_id": "00237798",
+    "employee_name": "Kittima Munee",
+    "department": "Reservations",
+    "position": "Reservation Agent",
+    "level": "TM",
+    "email": "spiderkik2001@gmail.com",
+    "phone": "0952835143"
+  },
+  {
+    "employee_id": "07112737",
+    "employee_name": "Natthawut Promthat",
+    "department": "Front Office",
+    "position": "Bellman",
+    "level": "TM",
+    "email": "natthawut32073@gmail.com",
+    "phone": "0925551540"
+  },
+  {
+    "employee_id": "00006833",
+    "employee_name": "Jakapan Jitsai",
+    "department": "Front Office",
+    "position": "Duty Manager",
+    "level": "SH",
+    "email": "jakapan_ji@minor.com",
+    "phone": "0807007625"
+  },
+  {
+    "employee_id": "07136702",
+    "employee_name": "Rachatra Sommai",
+    "department": "Front Office",
+    "position": "Room Division Manager",
+    "level": "DH",
+    "email": "rachatra_so@minor.com",
+    "phone": "0984496959"
+  },
+  {
+    "employee_id": "07139062",
+    "employee_name": "Pornchanok Somboon",
+    "department": "Front Office",
+    "position": "Duty Manager",
+    "level": "SH",
+    "email": "pimy_2538@hotmail.com",
+    "phone": "0896482896"
+  },
+  {
+    "employee_id": "00206768",
+    "employee_name": "Punrada Mueangnin",
+    "department": "Housekeeping",
+    "position": "Housekeeping Attendant",
+    "level": "TM",
+    "email": "punradamueangnin@gmail.com",
+    "phone": "0650034235"
+  },
+  {
+    "employee_id": "00209836",
+    "employee_name": "Chutima Maneecharoen",
+    "department": "Housekeeping",
+    "position": "Housekeeping Supervisor",
+    "level": "UH",
+    "email": "chutima_mam30@icloud.com",
+    "phone": "0926274867"
+  },
+  {
+    "employee_id": "00238746",
+    "employee_name": "Yuwaporn Hinnan",
+    "department": "Housekeeping",
+    "position": "Housekeeping Attendant",
+    "level": "TM",
+    "email": "tumhinnan@gmail.com",
+    "phone": "0612161893"
+  },
+  {
+    "employee_id": "00240065",
+    "employee_name": "Jakkrit Chanapon",
+    "department": "Housekeeping",
+    "position": "Housekeeping Attendant",
+    "level": "TM",
+    "email": "fong0835059722@gmail.com",
+    "phone": "0835059722"
+  },
+  {
+    "employee_id": "00243185",
+    "employee_name": "Thunchamon Wichaidit",
+    "department": "Housekeeping",
+    "position": "Housekeeping Supervisor",
+    "level": "UH",
+    "email": "namphuang_j@hotmail.com",
+    "phone": "0967260342"
+  },
+  {
+    "employee_id": "07110579",
+    "employee_name": "Piyada Son-sa-ard",
+    "department": "Housekeeping",
+    "position": "Housekeeping Attendant",
+    "level": "TM",
+    "email": "piyada2003s@gmail.com",
+    "phone": "0842341838"
+  },
+  {
+    "employee_id": "07119391",
+    "employee_name": "Teerapong Koedmee",
+    "department": "Housekeeping",
+    "position": "Houseman",
+    "level": "TM",
+    "email": "koedmeeteerapong@gmail.com",
+    "phone": "0817866531"
+  },
+  {
+    "employee_id": "00010731",
+    "employee_name": "Hatthaya Seangjeang",
+    "department": "Housekeeping",
+    "position": "Assitant Housekeeping Manager",
+    "level": "SH",
+    "email": "hatthaya_se@avanihotels.com",
+    "phone": "0937455332"
+  },
+  {
+    "employee_id": "07127312",
+    "employee_name": "Sirichat Klaokliang",
+    "department": "Housekeeping",
+    "position": "Housekeeping Attendant",
+    "level": "TM",
+    "email": "sirichatklaokliang@gmail.com",
+    "phone": "0612364282"
+  },
+  {
+    "employee_id": "07133257",
+    "employee_name": "Tuttiya Buadat",
+    "department": "Housekeeping",
+    "position": "Linen Attendant",
+    "level": "TM",
+    "email": "nongning 252110@gmail.com",
+    "phone": "0949322664"
+  },
+  {
+    "employee_id": "07139063",
+    "employee_name": "Sunisa Sodarak",
+    "department": "Housekeeping",
+    "position": "Disable",
+    "level": "TM",
+    "email": "",
+    "phone": ""
+  },
+  {
+    "employee_id": "00239845",
+    "employee_name": "Sumalin Tanchot",
+    "department": "People & Culture",
+    "position": "Commis 3",
+    "level": "TM",
+    "email": "sumalintanchot23@gmail.com",
+    "phone": "0827187734"
+  },
+  {
+    "employee_id": "07108159",
+    "employee_name": "Jessada Jantaramunee",
+    "department": "People & Culture",
+    "position": "Learning Executive",
+    "level": "UH",
+    "email": "jessada_ja@minor.com",
+    "phone": "0848586848"
+  },
+  {
+    "employee_id": "07114138",
+    "employee_name": "Kanoksee Naulnoo",
+    "department": "People & Culture",
+    "position": "Health & Safety Officer",
+    "level": "TM",
+    "email": "kanokseen3701@gmail.com",
+    "phone": "0659548432"
+  },
+  {
+    "employee_id": "07120112",
+    "employee_name": "Natpisit Darasuriyong",
+    "department": "People & Culture",
+    "position": "Manager of People & Culture",
+    "level": "DH",
+    "email": "natpisit_da@avanihotels.com",
+    "phone": "0635362259"
+  },
+  {
+    "employee_id": "00223530",
+    "employee_name": "Parinya Nuannamjit",
+    "department": "People & Culture",
+    "position": "Assistant Learning Manager",
+    "level": "SH",
+    "email": "parinya.nuannamjit@avanihotels.com",
+    "phone": "0969143410"
+  },
+  {
+    "employee_id": "00103094",
+    "employee_name": "Arinrada Padkhiam",
+    "department": "Spa",
+    "position": "Spa Supervisor",
+    "level": "UH",
+    "email": "ariradav5s@gmail.com",
+    "phone": "0982520496"
+  },
+  {
+    "employee_id": "00204995",
+    "employee_name": "Penvadee Wijitsopa",
+    "department": "Spa",
+    "position": "Spa Therapist",
+    "level": "TM",
+    "email": "penvadee4899@gmail.com",
+    "phone": "0857854899"
+  },
+  {
+    "employee_id": "00214211",
+    "employee_name": "Hatairat Tangkanitanon",
+    "department": "Spa",
+    "position": "Assistant Spa Manager",
+    "level": "SH",
+    "email": "hatairat_ta@minor.com",
+    "phone": "0809197611"
+  },
+  {
+    "employee_id": "07119408",
+    "employee_name": "Lalita Inrit",
+    "department": "Spa",
+    "position": "Spa Therapist",
+    "level": "TM",
+    "email": "deemlalita44@gmail.com",
+    "phone": "0945915669"
+  },
+  {
+    "employee_id": "00228626",
+    "employee_name": "Rungtawan Naiyanit",
+    "department": "Sport & Recreation",
+    "position": "Assistant Recreation Manager",
+    "level": "SH",
+    "email": "rungtawan_na@minor.com",
+    "phone": "0927304080"
+  },
+  {
+    "employee_id": "00005840",
+    "employee_name": "Thararat Sangpan",
+    "department": "Executive",
+    "position": "Resort Manager",
+    "level": "DI",
+    "email": "thararat_s@avanihotels.com",
+    "phone": "0819780877"
+  },
+  {
+    "employee_id": "07137582",
+    "employee_name": "Ketsaraphon Detmani",
+    "department": "Executive",
+    "position": "Sales & Events Executive",
+    "level": "UH",
+    "email": "d.kesaraporn@gmail.com",
+    "phone": "0857185438"
+  },
+  {
+    "employee_id": "00057705",
+    "employee_name": "Anan Hayicheteh",
+    "department": "IT",
+    "position": "Assistant IT Manager",
+    "level": "SH",
+    "email": "anan5675@gmail.com",
+    "phone": "0872915676"
+  }
+]
