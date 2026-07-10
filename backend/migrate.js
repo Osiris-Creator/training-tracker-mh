@@ -20,7 +20,11 @@ async function migrate() {
       CREATE TABLE IF NOT EXISTS employees (
         employee_id TEXT PRIMARY KEY,
         employee_name TEXT NOT NULL,
-        department TEXT NOT NULL,
+        department TEXT,
+        position TEXT,
+        level TEXT,
+        email TEXT,
+        phone TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
@@ -70,8 +74,8 @@ async function migrate() {
       for (const emp of employees) {
         try {
           await client.query(
-            'INSERT INTO employees (employee_id, employee_name, department) VALUES ($1, $2, $3) ON CONFLICT (employee_id) DO NOTHING',
-            [emp.employee_id, emp.employee_name, emp.department]
+            'INSERT INTO employees (employee_id, employee_name, department, position, level, email, phone) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT (employee_id) DO NOTHING',
+            [emp.employee_id, emp.employee_name, emp.department, emp.position, emp.level, emp.email, emp.phone]
           );
         } catch (err) {
           console.warn(`⚠️  Skipped ${emp.employee_name}: ${err.message}`);
