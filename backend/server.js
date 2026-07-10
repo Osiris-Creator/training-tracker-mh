@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 // CORS configuration for production
 const allowedOrigins = [
   'http://localhost:3000',
+  'https://training-tracker-mh.vercel.app',
   process.env.FRONTEND_URL || 'http://localhost:3000'
 ];
 
