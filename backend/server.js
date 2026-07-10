@@ -618,17 +618,32 @@ app.get('/api/attachment/preview', async (req, res) => {
       return res.status(400).json({ error: 'Invalid URL' });
     }
 
-    // Modify URL to add fl_attachment flag removal for inline viewing
-    let modifiedUrl = url;
+    // Fetch the file from Cloudinary
+    const axios = require('axios');
+    const response = await axios.get(url, {
+      responseType: 'stream'
+    });
 
-    // For PDF files, ensure they open inline
+    // Determine content type from the original URL
+    let contentType = 'application/octet-stream';
     if (url.includes('.pdf')) {
-      // Replace /upload/ with /upload/fl_attachment:false/
-      modifiedUrl = url.replace('/upload/', '/upload/fl_attachment:false/');
+      contentType = 'application/pdf';
+    } else if (url.includes('.jpg') || url.includes('.jpeg')) {
+      contentType = 'image/jpeg';
+    } else if (url.includes('.png')) {
+      contentType = 'image/png';
+    } else if (url.includes('.doc')) {
+      contentType = 'application/msword';
+    } else if (url.includes('.docx')) {
+      contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
     }
 
-    // Redirect to the modified Cloudinary URL
-    res.redirect(modifiedUrl);
+    // Set headers to display inline instead of download
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', 'inline');
+
+    // Pipe the file stream to response
+    response.data.pipe(res);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
