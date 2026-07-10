@@ -16,6 +16,7 @@ const storage = new CloudinaryStorage({
     folder: 'training-attachments',
     allowed_formats: ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'],
     resource_type: 'auto',
+    access_mode: 'public', // Make files publicly accessible
     max_file_size: 5 * 1024 * 1024 // 5MB
   }
 });
