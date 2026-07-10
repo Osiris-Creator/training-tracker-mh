@@ -631,6 +631,7 @@
   text-decoration: none;
   transition: all 0.2s;
   cursor: pointer;
+  border: none;
 }
 
 .attachment-link:hover {
@@ -642,4 +643,32 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+/* Preview Modal */
+.preview-modal {
+  background-color: #FDFBF7;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-body {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 70vh;
 }

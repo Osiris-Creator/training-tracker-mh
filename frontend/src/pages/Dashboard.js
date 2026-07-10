@@ -21,6 +21,7 @@ function Dashboard() {
   const [selectedSession, setSelectedSession] = useState(null);
   const [sessionDetails, setSessionDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
     loadStats();
@@ -57,6 +58,14 @@ function Dashboard() {
   const closeModal = () => {
     setSelectedSession(null);
     setSessionDetails(null);
+  };
+
+  const openPreview = (url) => {
+    setPreviewUrl(url);
+  };
+
+  const closePreview = () => {
+    setPreviewUrl(null);
   };
 
   if (loading) {
@@ -252,15 +261,16 @@ function Dashboard() {
                       {formatDuration(record.training_hours)}
                     </div>
                     {record.attachment_url && (
-                      <a
-                        href={`${API_BASE_URL.replace('/api', '')}/api/attachment/preview?url=${encodeURIComponent(record.attachment_url)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openPreview(record.attachment_url);
+                        }}
                         className="attachment-link"
                         title="View attachment"
                       >
                         📎
-                      </a>
+                      </button>
                     )}
                   </div>
                 </div>
@@ -361,6 +371,25 @@ function Dashboard() {
                   <p className="no-trainees">No participants yet</p>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* File Preview Modal */}
+      {previewUrl && (
+        <div className="modal-overlay" onClick={closePreview}>
+          <div className="modal-content preview-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>File Preview</h2>
+              <button className="close-btn" onClick={closePreview}>×</button>
+            </div>
+            <div className="preview-body">
+              <iframe
+                src={`${API_BASE_URL.replace('/api', '')}/api/attachment/preview?url=${encodeURIComponent(previewUrl)}`}
+                title="File Preview"
+                className="preview-iframe"
+              />
             </div>
           </div>
         </div>
