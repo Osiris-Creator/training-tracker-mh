@@ -400,7 +400,7 @@ app.get('/api/dashboard/stats', async (req, res) => {
       LEFT JOIN employees trainer_emp ON trainer.employee_id = trainer_emp.employee_id
       LEFT JOIN training_records trainee ON trainer.id = trainee.session_id AND trainee.role = 'trainee'
       WHERE trainer.role = 'trainer'
-      GROUP BY trainer.id
+      GROUP BY trainer.id, trainer.training_topic, trainer.training_date, trainer.training_hours, trainer.created_at, trainer_emp.employee_name, trainer_emp.department
       ORDER BY trainer.training_date DESC, trainer.created_at DESC
       LIMIT 10
     `);
