@@ -10,29 +10,65 @@ if (process.env.DATABASE_URL) {
     }
   });
 
-  // Export PostgreSQL-compatible interface
+  // Test connection
+  pool.on('error', (err) => {
+    console.error('Unexpected error on idle PostgreSQL client', err);
+  });
+
+  // Export PostgreSQL-compatible interface that mimics SQLite
   module.exports = {
-    query: (text, params, callback) => {
-      return pool.query(text, params, callback);
-    },
+    // For direct queries
+    query: (text, params) => pool.query(text, params),
+
+    // SQLite-style all() method
     all: (sql, params, callback) => {
-      pool.query(sql, params)
+      // Convert SQLite ? placeholders to PostgreSQL $1, $2, etc.
+      let pgSql = sql;
+      let paramIndex = 1;
+      while (pgSql.includes('?')) {
+        pgSql = pgSql.replace('?', `$${paramIndex}`);
+        paramIndex++;
+      }
+
+      pool.query(pgSql, params)
         .then(result => callback(null, result.rows))
         .catch(err => callback(err));
     },
+
+    // SQLite-style get() method
     get: (sql, params, callback) => {
-      pool.query(sql, params)
-        .then(result => callback(null, result.rows[0]))
+      // Convert SQLite ? placeholders to PostgreSQL $1, $2, etc.
+      let pgSql = sql;
+      let paramIndex = 1;
+      while (pgSql.includes('?')) {
+        pgSql = pgSql.replace('?', `$${paramIndex}`);
+        paramIndex++;
+      }
+
+      pool.query(pgSql, params)
+        .then(result => callback(null, result.rows[0] || null))
         .catch(err => callback(err));
     },
-    run: (sql, params, callback) => {
-      pool.query(sql, params)
+
+    // SQLite-style run() method
+    run: function(sql, params, callback) {
+      // Convert SQLite ? placeholders to PostgreSQL $1, $2, etc.
+      let pgSql = sql;
+      let paramIndex = 1;
+      while (pgSql.includes('?')) {
+        pgSql = pgSql.replace('?', `$${paramIndex}`);
+        paramIndex++;
+      }
+
+      pool.query(pgSql, params)
         .then(result => {
           if (callback) {
-            callback.call({
+            // Mimic SQLite's this context
+            const context = {
               changes: result.rowCount,
-              lastID: result.rows[0]?.id
-            }, null);
+              lastID: result.rows && result.rows.length > 0 ? result.rows[0].id : null
+            };
+            callback.call(context, null);
           }
         })
         .catch(err => {
@@ -40,6 +76,9 @@ if (process.env.DATABASE_URL) {
         });
     }
   };
+
+  console.log('✅ Using PostgreSQL database');
+
 } else {
   // Development: Use SQLite
   const sqlite3 = require('sqlite3').verbose();
@@ -89,5 +128,6 @@ if (process.env.DATABASE_URL) {
     db.run('CREATE INDEX IF NOT EXISTS idx_training_date ON training_records(training_date)');
   });
 
+  console.log('✅ Using SQLite database');
   module.exports = db;
 }
