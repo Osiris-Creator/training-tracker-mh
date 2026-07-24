@@ -6,6 +6,7 @@ import QRCodePage from './pages/QRCodePage';
 import EmployeeManagement from './pages/EmployeeManagement';
 import Leaderboard from './pages/Leaderboard';
 import AdminSettings from './pages/AdminSettings';
+import Reports from './pages/Reports';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
@@ -42,6 +43,9 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
               <NavLink to="/employees" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                 Employees
               </NavLink>
+              <NavLink to="/reports" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Reports
+              </NavLink>
               <NavLink to="/admin" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                 Admin
               </NavLink>
@@ -74,6 +78,11 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
           <Route path="/employees" element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <EmployeeManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/reports" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Reports />
             </ProtectedRoute>
           } />
           <Route path="/admin" element={

@@ -334,6 +334,105 @@ app.get('/api/training', async (req, res) => {
   }
 });
 
+// Get training records by date range (for reports)
+app.get('/api/training/report', async (req, res) => {
+  try {
+    const { start_date, end_date, department, role } = req.query;
+
+    if (!start_date || !end_date) {
+      return res.status(400).json({ error: 'start_date and end_date are required' });
+    }
+
+    let sql = `
+      SELECT
+        t.id,
+        t.employee_id,
+        e.employee_name,
+        e.department,
+        e.position,
+        e.level,
+        t.role,
+        t.training_date,
+        t.training_topic,
+        t.training_hours,
+        t.trainer_name,
+        t.notes,
+        t.created_at
+      FROM training_records t
+      JOIN employees e ON t.employee_id = e.employee_id
+      WHERE t.training_date BETWEEN ? AND ?
+    `;
+
+    const params = [start_date, end_date];
+
+    // Filter by department if provided
+    if (department && department !== 'all') {
+      sql += ' AND e.department = ?';
+      params.push(department);
+    }
+
+    // Filter by role if provided
+    if (role && role !== 'all') {
+      sql += ' AND t.role = ?';
+      params.push(role);
+    }
+
+    sql += ' ORDER BY t.training_date DESC, e.employee_name ASC';
+
+    const rows = await dbAll(sql, params);
+
+    // Calculate summary statistics
+    const summary = {
+      total_records: rows.length,
+      total_hours: rows.reduce((sum, r) => sum + parseFloat(r.training_hours), 0),
+      unique_employees: new Set(rows.map(r => r.employee_id)).size,
+      by_department: {},
+      by_role: {}
+    };
+
+    // Group by department
+    rows.forEach(row => {
+      if (!summary.by_department[row.department]) {
+        summary.by_department[row.department] = {
+          count: 0,
+          hours: 0,
+          employees: new Set()
+        };
+      }
+      summary.by_department[row.department].count++;
+      summary.by_department[row.department].hours += parseFloat(row.training_hours);
+      summary.by_department[row.department].employees.add(row.employee_id);
+    });
+
+    // Convert Sets to counts
+    Object.keys(summary.by_department).forEach(dept => {
+      summary.by_department[dept].employees = summary.by_department[dept].employees.size;
+    });
+
+    // Group by role
+    rows.forEach(row => {
+      if (!summary.by_role[row.role]) {
+        summary.by_role[row.role] = { count: 0, hours: 0 };
+      }
+      summary.by_role[row.role].count++;
+      summary.by_role[row.role].hours += parseFloat(row.training_hours);
+    });
+
+    res.json({
+      records: rows,
+      summary: summary,
+      filters: {
+        start_date,
+        end_date,
+        department: department || 'all',
+        role: role || 'all'
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Get training records by employee
 app.get('/api/training/employee/:id', async (req, res) => {
   try {
