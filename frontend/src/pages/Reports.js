@@ -41,7 +41,7 @@ function Reports() {
 
   const fetchReport = async () => {
     if (!startDate || !endDate) {
-      setError('กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด');
+      setError('Please select start and end dates');
       return;
     }
 
@@ -59,7 +59,7 @@ function Reports() {
       const response = await axios.get(`${API_BASE_URL}/training/report?${params}`);
       setReportData(response.data);
     } catch (err) {
-      setError('ไม่สามารถโหลดข้อมูลได้: ' + (err.response?.data?.error || err.message));
+      setError('Failed to load data: ' + (err.response?.data?.error || err.message));
     } finally {
       setLoading(false);
     }
@@ -67,24 +67,24 @@ function Reports() {
 
   const exportToExcel = () => {
     if (!reportData || !reportData.records.length) {
-      alert('ไม่มีข้อมูลสำหรับ Export');
+      alert('No data to export');
       return;
     }
 
     // Prepare data for Excel
     const excelData = reportData.records.map((record, index) => ({
-      'ลำดับ': index + 1,
-      'รหัสพนักงาน': record.employee_id,
-      'ชื่อพนักงาน': record.employee_name,
-      'แผนก': record.department || '-',
-      'ตำแหน่ง': record.position || '-',
-      'ระดับ': record.level || '-',
-      'บทบาท': record.role === 'trainer' ? 'วิทยากร' : 'ผู้เข้าอบรม',
-      'วันที่': record.training_date,
-      'หัวข้อการอบรม': record.training_topic,
-      'จำนวนชั่วโมง': record.training_hours,
-      'วิทยากร': record.trainer_name || '-',
-      'หมายเหตุ': record.notes || '-'
+      'No.': index + 1,
+      'Employee ID': record.employee_id,
+      'Employee Name': record.employee_name,
+      'Department': record.department || '-',
+      'Position': record.position || '-',
+      'Level': record.level || '-',
+      'Role': record.role === 'trainer' ? 'Trainer' : 'Trainee',
+      'Date': record.training_date,
+      'Training Topic': record.training_topic,
+      'Hours': record.training_hours,
+      'Trainer': record.trainer_name || '-',
+      'Notes': record.notes || '-'
     }));
 
     // Create workbook
@@ -93,36 +93,36 @@ function Reports() {
 
     // Set column widths
     ws['!cols'] = [
-      { wch: 8 },  // ลำดับ
-      { wch: 12 }, // รหัสพนักงาน
-      { wch: 25 }, // ชื่อพนักงาน
-      { wch: 20 }, // แผนก
-      { wch: 25 }, // ตำแหน่ง
-      { wch: 10 }, // ระดับ
-      { wch: 12 }, // บทบาท
-      { wch: 12 }, // วันที่
-      { wch: 35 }, // หัวข้อการอบรม
-      { wch: 12 }, // จำนวนชั่วโมง
-      { wch: 25 }, // วิทยากร
-      { wch: 30 }  // หมายเหตุ
+      { wch: 8 },  // No.
+      { wch: 12 }, // Employee ID
+      { wch: 25 }, // Employee Name
+      { wch: 20 }, // Department
+      { wch: 25 }, // Position
+      { wch: 10 }, // Level
+      { wch: 12 }, // Role
+      { wch: 12 }, // Date
+      { wch: 35 }, // Training Topic
+      { wch: 12 }, // Hours
+      { wch: 25 }, // Trainer
+      { wch: 30 }  // Notes
     ];
 
     XLSX.utils.book_append_sheet(wb, ws, 'Training Report');
 
     // Add summary sheet
     const summaryData = [
-      { 'รายการ': 'ช่วงวันที่', 'ข้อมูล': `${startDate} ถึง ${endDate}` },
-      { 'รายการ': 'แผนก', 'ข้อมูล': department === 'all' ? 'ทั้งหมด' : department },
-      { 'รายการ': 'บทบาท', 'ข้อมูล': role === 'all' ? 'ทั้งหมด' : (role === 'trainer' ? 'วิทยากร' : 'ผู้เข้าอบรม') },
-      { 'รายการ': '', 'ข้อมูล': '' },
-      { 'รายการ': 'จำนวนบันทึกทั้งหมด', 'ข้อมูล': reportData.summary.total_records },
-      { 'รายการ': 'จำนวนชั่วโมงรวม', 'ข้อมูล': reportData.summary.total_hours.toFixed(2) },
-      { 'รายการ': 'จำนวนพนักงาน', 'ข้อมูล': reportData.summary.unique_employees }
+      { 'Item': 'Date Range', 'Value': `${startDate} to ${endDate}` },
+      { 'Item': 'Department', 'Value': department === 'all' ? 'All' : department },
+      { 'Item': 'Role', 'Value': role === 'all' ? 'All' : (role === 'trainer' ? 'Trainer' : 'Trainee') },
+      { 'Item': '', 'Value': '' },
+      { 'Item': 'Total Records', 'Value': reportData.summary.total_records },
+      { 'Item': 'Total Hours', 'Value': reportData.summary.total_hours.toFixed(2) },
+      { 'Item': 'Total Employees', 'Value': reportData.summary.unique_employees }
     ];
 
     const wsSummary = XLSX.utils.json_to_sheet(summaryData);
     wsSummary['!cols'] = [{ wch: 25 }, { wch: 30 }];
-    XLSX.utils.book_append_sheet(wb, wsSummary, 'สรุป');
+    XLSX.utils.book_append_sheet(wb, wsSummary, 'Summary');
 
     // Generate filename
     const filename = `Training_Report_${startDate}_to_${endDate}.xlsx`;
@@ -147,23 +147,23 @@ function Reports() {
           <h1 className="page-title">
             Training <em>Reports</em>
           </h1>
-          <p className="page-subtitle">รายงานข้อมูลการอบรม</p>
+          <p className="page-subtitle">Training data reports</p>
         </div>
       </div>
 
       <div className="report-filters">
         <div className="filter-section">
-          <h3>เลือกช่วงเวลา</h3>
+          <h3>Select Period</h3>
 
           <div className="quick-dates">
-            <button onClick={() => setQuickDate(7)} className="quick-date-btn">7 วันล่าสุด</button>
-            <button onClick={() => setQuickDate(30)} className="quick-date-btn">30 วันล่าสุด</button>
-            <button onClick={() => setQuickDate(90)} className="quick-date-btn">90 วันล่าสุด</button>
+            <button onClick={() => setQuickDate(7)} className="quick-date-btn">Last 7 Days</button>
+            <button onClick={() => setQuickDate(30)} className="quick-date-btn">Last 30 Days</button>
+            <button onClick={() => setQuickDate(90)} className="quick-date-btn">Last 90 Days</button>
           </div>
 
           <div className="date-inputs">
             <div className="form-group">
-              <label>วันที่เริ่มต้น</label>
+              <label>Start Date</label>
               <input
                 type="date"
                 value={startDate}
@@ -172,7 +172,7 @@ function Reports() {
               />
             </div>
             <div className="form-group">
-              <label>วันที่สิ้นสุด</label>
+              <label>End Date</label>
               <input
                 type="date"
                 value={endDate}
@@ -184,31 +184,31 @@ function Reports() {
         </div>
 
         <div className="filter-section">
-          <h3>กรองข้อมูล</h3>
+          <h3>Filter Data</h3>
           <div className="filter-inputs">
             <div className="form-group">
-              <label>แผนก</label>
+              <label>Department</label>
               <select
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
                 className="form-input"
               >
-                <option value="all">ทั้งหมด</option>
+                <option value="all">All</option>
                 {departments.map(dept => (
                   <option key={dept} value={dept}>{dept}</option>
                 ))}
               </select>
             </div>
             <div className="form-group">
-              <label>บทบาท</label>
+              <label>Role</label>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 className="form-input"
               >
-                <option value="all">ทั้งหมด</option>
-                <option value="trainee">ผู้เข้าอบรม</option>
-                <option value="trainer">วิทยากร</option>
+                <option value="all">All</option>
+                <option value="trainee">Trainee</option>
+                <option value="trainer">Trainer</option>
               </select>
             </div>
           </div>
@@ -216,7 +216,7 @@ function Reports() {
 
         <div className="filter-actions">
           <button onClick={fetchReport} className="fetch-btn" disabled={loading}>
-            {loading ? 'กำลังโหลด...' : 'สร้างรายงาน'}
+            {loading ? 'Loading...' : 'Generate Report'}
           </button>
         </div>
       </div>
@@ -229,22 +229,22 @@ function Reports() {
         <>
           <div className="report-summary">
             <div className="summary-card">
-              <div className="summary-label">จำนวนบันทึก</div>
+              <div className="summary-label">Total Records</div>
               <div className="summary-value">{reportData.summary.total_records}</div>
             </div>
             <div className="summary-card">
-              <div className="summary-label">ชั่วโมงรวม</div>
+              <div className="summary-label">Total Hours</div>
               <div className="summary-value">{reportData.summary.total_hours.toFixed(2)}</div>
             </div>
             <div className="summary-card">
-              <div className="summary-label">จำนวนพนักงาน</div>
+              <div className="summary-label">Total Employees</div>
               <div className="summary-value">{reportData.summary.unique_employees}</div>
             </div>
           </div>
 
           <div className="report-actions">
             <button onClick={exportToExcel} className="export-btn">
-              📊 Export เป็น Excel
+              📊 Export to Excel
             </button>
           </div>
 
@@ -252,15 +252,15 @@ function Reports() {
             <table className="report-table">
               <thead>
                 <tr>
-                  <th>ลำดับ</th>
-                  <th>รหัสพนักงาน</th>
-                  <th>ชื่อพนักงาน</th>
-                  <th>แผนก</th>
-                  <th>บทบาท</th>
-                  <th>วันที่</th>
-                  <th>หัวข้อ</th>
-                  <th>ชั่วโมง</th>
-                  <th>วิทยากร</th>
+                  <th>No.</th>
+                  <th>Employee ID</th>
+                  <th>Employee Name</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Date</th>
+                  <th>Topic</th>
+                  <th>Hours</th>
+                  <th>Trainer</th>
                 </tr>
               </thead>
               <tbody>
@@ -272,7 +272,7 @@ function Reports() {
                     <td>{record.department || '-'}</td>
                     <td>
                       <span className={`role-badge ${record.role}`}>
-                        {record.role === 'trainer' ? 'วิทยากร' : 'ผู้เข้าอบรม'}
+                        {record.role === 'trainer' ? 'Trainer' : 'Trainee'}
                       </span>
                     </td>
                     <td>{record.training_date}</td>
