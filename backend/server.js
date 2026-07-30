@@ -722,6 +722,28 @@ app.get('/api/qrcode', async (req, res) => {
   }
 });
 
+// Health check endpoint
+app.get('/api/health', async (req, res) => {
+  try {
+    // Test database connection
+    const testQuery = 'SELECT 1 as test';
+    const result = await dbGet(testQuery);
+
+    res.json({
+      status: 'healthy',
+      database: 'connected',
+      timestamp: new Date().toISOString(),
+      env: process.env.NODE_ENV || 'development'
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'unhealthy',
+      database: 'disconnected',
+      error: err.message
+    });
+  }
+});
+
 // No proxy endpoint needed - Supabase Storage serves files directly with inline disposition!
 
 // TEMPORARY: Manual migration trigger endpoint
