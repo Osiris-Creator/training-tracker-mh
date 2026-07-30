@@ -73,17 +73,17 @@ app.post('/api/employees', async (req, res) => {
 
     const sql = `
       INSERT INTO employees (employee_id, employee_name, position, department, level, email, phone)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING employee_id
     `;
 
     const result = await dbRun(sql, [employee_id, employee_name, position, department, level, email, phone]);
     res.json({
-      id: result.lastID,
-      employee_id,
+      employee_id: result.employee_id || employee_id,
       message: 'Employee added successfully'
     });
   } catch (err) {
-    if (err.message.includes('UNIQUE') || err.message.includes('duplicate')) {
+    if (err.message.includes('UNIQUE') || err.message.includes('duplicate') || err.code === '23505') {
       return res.status(400).json({ error: 'Employee ID already exists' });
     }
     res.status(500).json({ error: err.message });
@@ -102,17 +102,17 @@ app.put('/api/employees/:id', async (req, res) => {
 
     const sql = `
       UPDATE employees
-      SET employee_name = ?, position = ?, department = ?, level = ?, email = ?, phone = ?
-      WHERE employee_id = ?
+      SET employee_name = $1, position = $2, department = $3, level = $4, email = $5, phone = $6
+      WHERE employee_id = $7
     `;
 
     const result = await dbRun(sql, [employee_name, position, department, level, email, phone, id]);
-    if (result.changes === 0) {
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: 'Employee not found' });
     }
     res.json({
       message: 'Employee updated successfully',
-      changes: result.changes
+      changes: result.rowCount
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -125,7 +125,7 @@ app.delete('/api/employees/:id', async (req, res) => {
     const { id } = req.params;
 
     // First check if employee has training records
-    const row = await dbGet('SELECT COUNT(*) as count FROM training_records WHERE employee_id = ?', [id]);
+    const row = await dbGet('SELECT COUNT(*) as count FROM training_records WHERE employee_id = $1', [id]);
 
     if (row.count > 0) {
       return res.status(400).json({
@@ -134,13 +134,13 @@ app.delete('/api/employees/:id', async (req, res) => {
     }
 
     // If no training records, proceed with deletion
-    const result = await dbRun('DELETE FROM employees WHERE employee_id = ?', [id]);
-    if (result.changes === 0) {
+    const result = await dbRun('DELETE FROM employees WHERE employee_id = $1', [id]);
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: 'Employee not found' });
     }
     res.json({
       message: 'Employee deleted successfully',
-      changes: result.changes
+      changes: result.rowCount
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
