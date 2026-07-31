@@ -30,9 +30,10 @@
 }
 
 .logo-image {
-  height: 56px;
+  height: 52px;
   width: auto;
   object-fit: contain;
+  object-position: center;
 }
 
 .logo-divider {

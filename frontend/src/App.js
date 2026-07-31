@@ -26,7 +26,7 @@ function AppContent({ isAuthenticated, setIsAuthenticated }) {
         <nav className="navbar">
           <div className="nav-container">
             <div className="nav-logo">
-              <img src="/images/avani-vc-logo.svg" alt="Avani+ Vacation Club Samui" className="logo-image" />
+              <img src="/images/avani-vc-logo.png" alt="Avani+ Vacation Club Samui" className="logo-image" />
               <span className="logo-divider">|</span>
               <span className="logo-text">Training Tracker</span>
             </div>
