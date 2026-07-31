@@ -77,11 +77,6 @@ function Login({ onLogin }) {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-
-        <div className="login-footer">
-          <p>Default credentials:</p>
-          <code>admin / admin123</code>
-        </div>
       </div>
 
       <div className="public-access-notice">
