@@ -358,8 +358,16 @@ function EmployeeManagement() {
                 </div>
                 <div className="form-group">
                   <label>Department</label>
-                  <input type="text" name="department" value={formData.department}
-                    onChange={handleInputChange} className="form-input" />
+                  <select name="department" value={formData.department}
+                    onChange={handleInputChange} className="form-input">
+                    <option value="">Select Department</option>
+                    {departments
+                      .filter(d => d !== 'all')
+                      .map(dept => (
+                        <option key={dept} value={dept}>{dept}</option>
+                      ))
+                    }
+                  </select>
                 </div>
               </div>
               <div className="form-row">
