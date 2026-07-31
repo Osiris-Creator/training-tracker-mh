@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navbar Style Preview</title>
+  <style>
+    body { margin: 0; font-family: 'Inter', -apple-system, sans-serif; background: #f0ece4; }
+    .section { margin-bottom: 3rem; }
+    .section-label {
+      text-align: center; padding: 1rem 2rem 0.5rem;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em;
+      color: #555; background: #f0ece4;
+    }
+
+    /* ─── Style A: Dark Navy ─── */
+    .navbar-a {
+      background: #1A2332;
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 4px 20px rgba(26,35,50,0.35);
+      min-height: 80px;
+    }
+    .navbar-a .logo-wrap { display: flex; align-items: center; gap: 1rem; }
+    .navbar-a .logo-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; padding: 6px 14px; text-align: center;
+    }
+    .navbar-a .logo-box .brand { font-size: 1.3rem; font-weight: 900; color: #fff; letter-spacing: 3px; }
+    .navbar-a .logo-box .sub { font-size: 0.6rem; color: rgba(255,255,255,0.65); letter-spacing: 1.5px; }
+    .navbar-a .divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
+    .navbar-a .app-name { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 1rem; }
+    .navbar-a .links { display: flex; gap: 0.375rem; align-items: center; flex-wrap: wrap; }
+    .navbar-a .link { color: rgba(255,255,255,0.7); font-size: 0.875rem; padding: 0.5rem 0.875rem; border-radius: 6px; transition: all 0.2s; cursor: pointer; }
+    .navbar-a .link:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    .navbar-a .link.active { background: #D4735E; color: #fff; font-weight: 500; }
+    .navbar-a .logout { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+    .navbar-a .logout:hover { border-color: #D4735E; color: #D4735E; }
+
+    /* ─── Style B: Clean Split ─── */
+    .navbar-b {
+      background: #fff;
+      display: flex; justify-content: space-between; align-items: stretch;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      min-height: 80px;
+    }
+    .navbar-b .logo-panel {
+      background: #F3EDE3;
+      display: flex; align-items: center; gap: 0.875rem;
+      padding: 0 1.75rem;
+      border-right: 1px solid #E0D6CA;
+      min-width: 240px;
+    }
+    .navbar-b .logo-box { text-align: center; }
+    .navbar-b .logo-box .brand { font-size: 1.25rem; font-weight: 900; color: #1A2332; letter-spacing: 3px; }
+    .navbar-b .logo-box .sub { font-size: 0.6rem; color: #6B6B6B; letter-spacing: 1px; }
+    .navbar-b .divider { width: 1px; height: 36px; background: #ccc; }
+    .navbar-b .app-name { color: #1A2332; font-weight: 700; font-size: 1rem; }
+    .navbar-b .links { display: flex; gap: 0; align-items: stretch; padding: 0 1rem; flex-wrap: wrap; }
+    .navbar-b .link {
+      color: #6B6B6B; font-size: 0.875rem; padding: 0 1rem;
+      display: flex; align-items: center;
+      border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s;
+    }
+    .navbar-b .link:hover { color: #1A2332; border-bottom-color: #D4735E; }
+    .navbar-b .link.active { color: #D4735E; border-bottom-color: #D4735E; font-weight: 600; }
+    .navbar-b .logout {
+      margin: auto 1rem; background: transparent; border: 1px solid #E0D6CA;
+      color: #6B6B6B; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;
+    }
+    .navbar-b .logout:hover { border-color: #C62828; color: #C62828; }
+
+    /* ─── Style C: Warm Gradient ─── */
+    .navbar-c {
+      background: linear-gradient(135deg, #FBF6EE 0%, #F2E9DC 100%);
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 12px rgba(212,115,94,0.12), 0 1px 4px rgba(0,0,0,0.06);
+      border-bottom: 2px solid rgba(212,115,94,0.2);
+      min-height: 88px;
+    }
+    .navbar-c .logo-wrap { display: flex; align-items: center; gap: 1.25rem; }
+    .navbar-c .logo-box { text-align: center; }
+    .navbar-c .logo-box .brand { font-size: 1.4rem; font-weight: 900; color: #1A2332; letter-spacing: 3px; }
+    .navbar-c .logo-box .sub { font-size: 0.65rem; color: #6B6B6B; letter-spacing: 1.5px; }
+    .navbar-c .divider { width: 1px; height: 44px; background: rgba(212,115,94,0.35); }
+    .navbar-c .app-name { color: #1A2332; font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+    .navbar-c .links { display: flex; gap: 0.375rem; align-items: center; flex-wrap: wrap; }
+    .navbar-c .link { color: #5C5C5C; font-size: 0.875rem; padding: 0.5rem 0.875rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .navbar-c .link:hover { color: #1A2332; background: rgba(212,115,94,0.1); }
+    .navbar-c .link.active { background: #D4735E; color: #fff; font-weight: 500; box-shadow: 0 2px 8px rgba(212,115,94,0.35); }
+    .navbar-c .logout {
+      background: transparent; border: 1.5px solid rgba(212,115,94,0.4);
+      color: #5C5C5C; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+    }
+    .navbar-c .logout:hover { background: #D4735E; color: #fff; border-color: #D4735E; }
+
+    /* ─── Style D: Luxury Frosted ─── */
+    .navbar-d {
+      background: rgba(251, 248, 243, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 3.5px solid #D4735E;
+      border-bottom: 1px solid rgba(212,115,94,0.15);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      min-height: 84px;
+    }
+    .navbar-d .logo-wrap { display: flex; align-items: center; gap: 1.25rem; }
+    .navbar-d .logo-box {
+      border: 1.5px solid rgba(26,35,50,0.12);
+      border-radius: 10px; padding: 8px 16px; text-align: center;
+      background: rgba(255,255,255,0.7);
+    }
+    .navbar-d .logo-box .brand { font-size: 1.3rem; font-weight: 900; color: #1A2332; letter-spacing: 3px; }
+    .navbar-d .logo-box .sub { font-size: 0.6rem; color: #555; letter-spacing: 1.5px; }
+    .navbar-d .divider { width: 1px; height: 40px; background: rgba(26,35,50,0.15); }
+    .navbar-d .app-name { color: #1A2332; font-weight: 700; font-size: 1rem; }
+    .navbar-d .links { display: flex; gap: 0.375rem; align-items: center; flex-wrap: wrap; }
+    .navbar-d .link { color: #5C5C5C; font-size: 0.875rem; padding: 0.5rem 0.875rem; border-radius: 7px; cursor: pointer; transition: all 0.2s; }
+    .navbar-d .link:hover { color: #D4735E; background: rgba(212,115,94,0.08); }
+    .navbar-d .link.active { background: #1A2332; color: #fff; font-weight: 500; }
+    .navbar-d .logout {
+      background: transparent; border: 1.5px solid rgba(26,35,50,0.2);
+      color: #5C5C5C; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 7px; cursor: pointer;
+    }
+    .navbar-d .logout:hover { background: #1A2332; color: #fff; border-color: #1A2332; }
+  </style>
+</head>
+<body>
+
+  <!-- Style A -->
+  <div class="section">
+    <div class="section-label">🅰️ Style A — Dark Navy (Professional / Hotel)</div>
+    <nav class="navbar-a">
+      <div class="logo-wrap">
+        <div class="logo-box">
+          <div class="brand">AVANI+</div>
+          <div class="sub">VACATION CLUB SAMUI</div>
+        </div>
+        <div class="divider"></div>
+        <span class="app-name">Training Tracker</span>
+      </div>
+      <div class="links">
+        <span class="link active">Dashboard</span>
+        <span class="link">Training Form</span>
+        <span class="link">Leaderboard</span>
+        <span class="link">Employees</span>
+        <span class="link">Reports</span>
+        <span class="link">Admin</span>
+        <span class="link">QR Code</span>
+        <button class="logout">Logout</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Style B -->
+  <div class="section">
+    <div class="section-label">🅱️ Style B — Clean Split (Modern Minimal)</div>
+    <nav class="navbar-b">
+      <div class="logo-panel">
+        <div class="logo-box">
+          <div class="brand">AVANI+</div>
+          <div class="sub">VACATION CLUB SAMUI</div>
+        </div>
+        <div class="divider"></div>
+        <span class="app-name">Training<br/>Tracker</span>
+      </div>
+      <div class="links">
+        <span class="link active">Dashboard</span>
+        <span class="link">Training Form</span>
+        <span class="link">Leaderboard</span>
+        <span class="link">Employees</span>
+        <span class="link">Reports</span>
+        <span class="link">Admin</span>
+        <span class="link">QR Code</span>
+      </div>
+      <button class="logout">Logout</button>
+    </nav>
+  </div>
+
+  <!-- Style C -->
+  <div class="section">
+    <div class="section-label">🅲 Style C — Warm Gradient ✨ (แนะนำ)</div>
+    <nav class="navbar-c">
+      <div class="logo-wrap">
+        <div class="logo-box">
+          <div class="brand">AVANI+</div>
+          <div class="sub">VACATION CLUB SAMUI</div>
+        </div>
+        <div class="divider"></div>
+        <span class="app-name">Training<br/>Tracker</span>
+      </div>
+      <div class="links">
+        <span class="link active">Dashboard</span>
+        <span class="link">Training Form</span>
+        <span class="link">Leaderboard</span>
+        <span class="link">Employees</span>
+        <span class="link">Reports</span>
+        <span class="link">Admin</span>
+        <span class="link">QR Code</span>
+        <button class="logout">Logout</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Style D -->
+  <div class="section">
+    <div class="section-label">🅳 Style D — Luxury Frosted (Elegant)</div>
+    <nav class="navbar-d">
+      <div class="logo-wrap">
+        <div class="logo-box">
+          <div class="brand">AVANI+</div>
+          <div class="sub">VACATION CLUB SAMUI</div>
+        </div>
+        <div class="divider"></div>
+        <span class="app-name">Training Tracker</span>
+      </div>
+      <div class="links">
+        <span class="link active">Dashboard</span>
+        <span class="link">Training Form</span>
+        <span class="link">Leaderboard</span>
+        <span class="link">Employees</span>
+        <span class="link">Reports</span>
+        <span class="link">Admin</span>
+        <span class="link">QR Code</span>
+        <button class="logout">Logout</button>
+      </div>
+    </nav>
+  </div>
+
+</body>
+</html>
