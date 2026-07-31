@@ -16,6 +16,7 @@ function EmployeeManagement() {
 
   // Filter states
   const [selectedDepartment, setSelectedDepartment] = useState('all');
+  const [selectedLevel, setSelectedLevel] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const [formData, setFormData] = useState({
@@ -48,14 +49,20 @@ function EmployeeManagement() {
     a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b)
   );
 
+  // Get unique levels
+  const levels = ['all', ...new Set(employees.map(e => e.level).filter(Boolean))].sort((a, b) =>
+    a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b)
+  );
+
   // Filter employees
   const filteredEmployees = employees.filter(emp => {
     const matchDept = selectedDepartment === 'all' || emp.department === selectedDepartment;
+    const matchLevel = selectedLevel === 'all' || emp.level === selectedLevel;
     const matchSearch = !searchQuery ||
       emp.employee_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       emp.employee_id?.toString().includes(searchQuery) ||
       emp.position?.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchDept && matchSearch;
+    return matchDept && matchLevel && matchSearch;
   });
 
   const handleAdd = () => {
@@ -241,6 +248,18 @@ function EmployeeManagement() {
             {departments.map(dept => (
               <option key={dept} value={dept}>
                 {dept === 'all' ? 'All Departments' : dept}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedLevel}
+            onChange={(e) => setSelectedLevel(e.target.value)}
+            className="dept-select"
+          >
+            {levels.map(lvl => (
+              <option key={lvl} value={lvl}>
+                {lvl === 'all' ? 'All Levels' : lvl}
               </option>
             ))}
           </select>
